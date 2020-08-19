@@ -26,7 +26,21 @@ public class TestRabbitMQ {
     public void testWork(){
         for (int i = 0; i <10 ; i++) {
             rabbitTemplate.convertAndSend("work","work模型"+i);
-
         }
+    }
+    //fanout广播形式
+    @Test
+    public void testFanout(){
+        rabbitTemplate.convertAndSend("logs","","Fanout模型发送的消息");
+    }
+    //route 路由模式
+    @Test
+    public void testRoute(){
+        rabbitTemplate.convertAndSend("directs","error","发送info的key的路由信息");
+    }
+    //Topics 订阅模式
+    @Test
+    public void testTopics(){
+        rabbitTemplate.convertAndSend("topics","user.save","user.save路由消息");
     }
 }
